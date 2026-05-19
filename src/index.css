@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    overflow: hidden;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color;
+    transition-duration: 350ms, 350ms, 200ms;
+    transition-timing-function: ease, ease, ease;
+  }
+
+
+  /* 仅桌面端显示滚动条样式，移动端已通过 .slide-snap-container 隐藏 */
+  @media (min-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
+  }
+}
+
+@layer components {
+  .slide-snap-container {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .slide-snap-container::-webkit-scrollbar {
+    display: none;
+  }
+  .slide-snap-item {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .nav-dot {
+    @apply transition-all duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+}
+
+/* Entrance animation initial state */
+[data-animate] {
+  opacity: 0;
+}
+[data-animate].animated {
+  opacity: 1;
+}
+
+/* Print styles */
+@media print {
+  html {
+    scroll-behavior: auto !important;
+    scroll-snap-type: none !important;
+  }
+  .slide-snap-item {
+    scroll-snap-align: none !important;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+  .slide-snap-item > section {
+    min-height: 100vh !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  #slide-nav,
+  #theme-toggle,
+  #slide-indicator,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: #1e293b !important;
+  }
+}

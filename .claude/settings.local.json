@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/renzhining/Documents/个人简介项目/resume log --all --oneline --decorate --graph)",
+      "Bash(git -C /Users/renzhining/Documents/个人简介项目/resume log --all --format='%H%n%an%n%ae%n%ad%n%s%n%b%n---' --date=iso)",
+      "Bash(git -C /Users/renzhining/Documents/个人简介项目/resume log --oneline --all)"
+    ]
+  }
+}
